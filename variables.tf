@@ -1,4 +1,4 @@
-variable "short_prefix" {
+
   type = string
 }
 
