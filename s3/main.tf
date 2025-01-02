@@ -96,25 +96,25 @@ module "bugfix_destroy" {
   bucket_name = aws_s3_bucket.object.id
 }
 
-module "replication" {
-  source       = "./replication"
-  short_prefix = var.short_prefix
-  long_prefix  = var.long_prefix
-  role         = var.role
-  tags         = var.tags
-  region       = var.region
-  account_id   = var.account_id
-  deployment   = var.deployment
-  bucket = {
-    id  = aws_s3_bucket.object.bucket
-    arn = aws_s3_bucket.object.arn
-  }
-  role_global_name   = var.role_global_name
-  bucket_global_name = var.short_prefix
-  kms_name           = length(module.kms) > 0 ? module.kms[0].name : null
-  depends_on = [
-    aws_s3_bucket_versioning.object,
-    module.s3_policy,
-    module.bugfix_destroy,
-  ]
-}
+# module "replication" {
+#   source       = "./replication"
+#   short_prefix = var.short_prefix
+#   long_prefix  = var.long_prefix
+#   role         = var.role
+#   tags         = var.tags
+#   region       = var.region
+#   account_id   = var.account_id
+#   deployment   = var.deployment
+#   bucket = {
+#     id  = aws_s3_bucket.object.bucket
+#     arn = aws_s3_bucket.object.arn
+#   }
+#   role_global_name   = var.role_global_name
+#   bucket_global_name = var.short_prefix
+#   kms_name           = length(module.kms) > 0 ? module.kms[0].name : null
+#   depends_on = [
+#     aws_s3_bucket_versioning.object,
+#     module.s3_policy,
+#     module.bugfix_destroy,
+#   ]
+# }
