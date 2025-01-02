@@ -62,32 +62,32 @@ module "file_directory" {
   depends_on = [module.temporary_directory]
 }
 
-module "copy_into_directory" {
-  count   = length(module.file_directory) > 0 ? 1 : 0
-  source  = "../../powershell-command"
-  command = <<COMMAND
-  Copy-Item "${var.file}" -Destination "${module.file_directory[0].path}/${local.key[length(local.key) - 1]}"
-  if (-not $?) {
-    throw "Unable to copy '${var.file}' to '${module.file_directory[0].path}/${local.key[length(local.key) - 1]}'"
-  }
-  COMMAND
-}
+# module "copy_into_directory" {
+#   count   = length(module.file_directory) > 0 ? 1 : 0
+#   source  = "../../powershell-command"
+#   command = <<COMMAND
+#   Copy-Item "${var.file}" -Destination "${module.file_directory[0].path}/${local.key[length(local.key) - 1]}"
+#   if (-not $?) {
+#     throw "Unable to copy '${var.file}' to '${module.file_directory[0].path}/${local.key[length(local.key) - 1]}'"
+#   }
+#   COMMAND
+# }
 
-locals {
-  file = var.file != null ? split("/", replace(var.file, "\\", "/")) : null
-}
+# locals {
+#   file = var.file != null ? split("/", replace(var.file, "\\", "/")) : null
+# }
 
-module "s3_bucket_object" {
-  source = "../../powershell-command"
-  command = <<COMMAND
-    ${var.content != null || local.file != null ? <<CONTENT
-      if (${length(module.s3_bucket_object_exists) > 0 ? (jsondecode(module.s3_bucket_object_exists[0].stdout) == true ? "$false" : "$true") : "$true"}) {
-        aws s3 sync "${local.directory}" "s3://${var.bucket}" --exclude='*' --include='${var.key}'
-      }
-    CONTENT
-  : <<CONTENT
-      "NO CONTENT"
-    CONTENT
-}
-  COMMAND
-}
+# module "s3_bucket_object" {
+#   source = "../../powershell-command"
+#   command = <<COMMAND
+#     ${var.content != null || local.file != null ? <<CONTENT
+#       if (${length(module.s3_bucket_object_exists) > 0 ? (jsondecode(module.s3_bucket_object_exists[0].stdout) == true ? "$false" : "$true") : "$true"}) {
+#         aws s3 sync "${local.directory}" "s3://${var.bucket}" --exclude='*' --include='${var.key}'
+#       }
+#     CONTENT
+#   : <<CONTENT
+#       "NO CONTENT"
+#     CONTENT
+# }
+#   COMMAND
+# }
