@@ -1,13 +1,13 @@
-module "white_list_bucket" {
-  source              = "../../white-list"
-  all_actions         = ["s3:*"]
-  administrator_roles = var.administrator_roles
-  title               = "Bucket"
-  resources = [
-    "arn:aws:s3:::${var.bucket}",
-  ]
-  actions_by_role = merge(
-    {
+# module "white_list_bucket" {
+#   source              = "../../white-list"
+#   all_actions         = ["s3:*"]
+#   administrator_roles = var.administrator_roles
+#   title               = "Bucket"
+#   resources = [
+#     "arn:aws:s3:::${var.bucket}",
+#   ]
+#   actions_by_role = merge(
+#     {
       # https://trten.sharepoint.com/sites/intr-plat-eng/SitePages/Storage-Bucket-Lifecycle-Optimization.aspx?OR=Teams-HL&CT=1679066238812#for-aws
       "arn:aws:iam::${var.account_id}:role/service-role/a206255-TRUCCR-Audit" : [
         "s3:ListBucket",
