@@ -24,11 +24,11 @@ module "secret" {
   read_roles              = var.read_roles
   administrator_roles     = var.administrator_roles
   key_rotation_days       = var.key_rotation_days
-  tags = merge(
-    var.tags,
-    {
-      "Description" = "API Key for ${var.title}"
-    }
-  )
+  # tags = merge(
+  #   var.tags,
+  #   {
+  #     "Description" = "API Key for ${var.title}"
+  #   }
+  # )
   kms = var.kms
 }
