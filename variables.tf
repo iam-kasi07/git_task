@@ -1,6 +1,6 @@
-variable "short_prefix" {
-  type = string
-}
+# variable "short_prefix" {
+#   type = string
+# }
 
 variable "long_prefix" {
   type = string
