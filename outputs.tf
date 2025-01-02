@@ -16,19 +16,19 @@ output "statements" {
           "arn:aws:s3:::${var.short_prefix}-${var.region.short}-${var.account_id}"
         ]
       },
-      {
-        "Action" : distinct([
-          # Replication
-          "s3:GetObjectVersionForReplication",
-          "s3:GetObjectVersionAcl",
-          "s3:GetObjectVersionTagging",
-          # Batch Operation
-          "s3:GetObject",
-          "s3:GetObjectVersion",
-          "s3:GetObjectAcl",
-          "s3:GetObjectTagging",
-          "s3:InitiateReplication",
-        ]),
+      # {
+      #   "Action" : distinct([
+      #     # Replication
+      #     "s3:GetObjectVersionForReplication",
+      #     "s3:GetObjectVersionAcl",
+      #     "s3:GetObjectVersionTagging",
+      #     # Batch Operation
+      #     "s3:GetObject",
+      #     "s3:GetObjectVersion",
+      #     "s3:GetObjectAcl",
+      #     "s3:GetObjectTagging",
+      #     "s3:InitiateReplication",
+      #   ]),
         "Effect" : "Allow",
         "Resource" : [
           "arn:aws:s3:::${var.short_prefix}-${var.region.short}-${var.account_id}/*"
