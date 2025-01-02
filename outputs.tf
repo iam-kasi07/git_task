@@ -35,23 +35,23 @@ output "statements" {
         ]
       },
       {
-        "Action" : [
-          "kms:Decrypt",
-        ],
-        "Effect" : "Allow",
-        "Condition" : {
-          "StringLike" : {
-            "kms:ViaService" : "s3.${var.region.long}.amazonaws.com",
-            "kms:EncryptionContext:aws:s3:arn" : [
-              "arn:aws:s3:::${var.short_prefix}-${var.region.short}-${var.account_id}/*"
-            ]
-          }
-        },
-        "Resource" : [
-          "*"
-        ]
-      },
-    ],
+    #     "Action" : [
+    #       "kms:Decrypt",
+    #     ],
+    #     "Effect" : "Allow",
+    #     "Condition" : {
+    #       "StringLike" : {
+    #         "kms:ViaService" : "s3.${var.region.long}.amazonaws.com",
+    #         "kms:EncryptionContext:aws:s3:arn" : [
+    #           "arn:aws:s3:::${var.short_prefix}-${var.region.short}-${var.account_id}/*"
+    #         ]
+    #       }
+    #     },
+    #     "Resource" : [
+    #       "*"
+    #     ]
+    #   },
+    # ],
     jsondecode(var.deployment != null ? jsonencode(flatten([for source_region in lookup(var.deployment, "sibling_regions", []) : [
       {
         "Action" : distinct([
