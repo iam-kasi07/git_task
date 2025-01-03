@@ -1,10 +1,10 @@
-output "statements" {
-  value = concat(
-    module.api_key_secret_rotate_policy.statements,
-    [
-    ]
-  )
-}
+# output "statements" {
+#   value = concat(
+#     module.api_key_secret_rotate_policy.statements,
+#     [
+#     ]
+#   )
+# }
 
 output "assume_statements" {
   value = concat(
