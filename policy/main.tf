@@ -1,17 +1,17 @@
-module "secret_rotate" {
-  count             = var.key_rotation_days != null ? 1 : 0
-  source            = "../secret-rotate"
-  short_prefix      = "${var.short_prefix}-api-key"
-  long_prefix       = "${var.long_prefix}-api-key"
-  role              = var.role
-  retention_in_days = var.retention_in_days
-  tags = merge(
-    var.tags,
-    {
-      "Description" = "API Key Rotation Lambda for ${var.title}"
-    }
-  )
-}
+# # module "secret_rotate" {
+# #   count             = var.key_rotation_days != null ? 1 : 0
+# #   source            = "../secret-rotate"
+# #   short_prefix      = "${var.short_prefix}-api-key"
+# #   long_prefix       = "${var.long_prefix}-api-key"
+# #   role              = var.role
+# #   retention_in_days = var.retention_in_days
+# #   tags = merge(
+# #     var.tags,
+# #     {
+# #       "Description" = "API Key Rotation Lambda for ${var.title}"
+# #     }
+# #   )
+# # }
 
 module "secret" {
   source = "../secret/"
